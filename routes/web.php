@@ -4,6 +4,7 @@ use App\Http\Resources\MessageCollection;
 use App\Models\Message;
 use Illuminate\Support\Facades\Route;
 use App\Http\Resources\MessageResource;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,9 @@ Route::get('/messages/{id}', function ($id) {
 Route::delete('/messages/{id}', function ($id) {
     return new MessageResource(Message::destroy($id));
 })->name('message.destroy');
+
+Route::put('/messages/{id}', function (Request $request, $id) {
+    $message = Message::findOrFail($id);
+    $message->update($request->all());
+    return new MessageResource($message);
+})->name('message.update');

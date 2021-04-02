@@ -25,4 +25,9 @@ class MessageHateoas
     {
         return $this->link('message.destroy', ['id' => $message->id]);
     }
+
+    public function update(Message $message)
+    {
+        return $this->link('message.update', ['id' => $message->id]);
+    }
 }
